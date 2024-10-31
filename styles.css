@@ -14,7 +14,7 @@ body {
     color: #fff;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
 }
@@ -25,7 +25,7 @@ body {
     background-color: rgba(26, 26, 26, 0.95);
     border: 2px solid #f2c718;
     border-radius: 15px;
-    margin-bottom: 20px;
+    margin: 20px 0;
     width: 90%;
     max-width: 400px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -83,8 +83,9 @@ header .material-icons {
 
 #chat-window {
     flex: 1;
-    padding: 15px;
+    padding: 15px 35px; /* Increased padding to accommodate icons */
     overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
     background-color: rgba(0, 0, 0, 0.8);
     position: relative;
 }
@@ -118,9 +119,10 @@ header .material-icons {
     font-family: 'Material Icons';
     position: absolute;
     top: 50%;
-    right: -25px;
+    right: -30px; /* Adjusted to prevent clipping */
     transform: translateY(-50%);
     font-size: 1.2em;
+    color: #f2c718;
 }
 
 .message.bot {
@@ -135,9 +137,10 @@ header .material-icons {
     font-family: 'Material Icons';
     position: absolute;
     top: 50%;
-    left: -25px;
+    left: -30px; /* Adjusted to prevent clipping */
     transform: translateY(-50%);
     font-size: 1.2em;
+    color: #f2c718;
 }
 
 .input-area {
@@ -238,6 +241,7 @@ footer a:hover {
     border-radius: 4px;
 }
 
+/* Responsive Design */
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.4em;
@@ -263,5 +267,11 @@ footer a:hover {
 
     footer p {
         font-size: 0.8em;
+    }
+
+    .message.user::after,
+    .message.bot::after {
+        left: -25px;
+        right: -25px;
     }
 }
