@@ -7,7 +7,7 @@
     "start": "vercel dev"
   },
   "dependencies": {
-    "openai": "^3.1.0" // Ensure you're using the latest version
+    "openai": "^3.1.0" 
   },
   "author": "Your Name",
   "license": "MIT"
