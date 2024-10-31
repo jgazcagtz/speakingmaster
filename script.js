@@ -7,6 +7,9 @@ const loading = document.getElementById('loading');
 let recognition;
 let isListening = false;
 
+// Initialize conversation history
+let conversationHistory = [];
+
 // Initialize Speech Recognition
 if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -53,6 +56,13 @@ function addMessage(text, sender) {
     msg.textContent = text;
     messages.appendChild(msg);
     messages.scrollTop = messages.scrollHeight;
+
+    // Append to conversation history
+    if (sender === 'user') {
+        conversationHistory.push({ role: 'user', content: text });
+    } else if (sender === 'bot') {
+        conversationHistory.push({ role: 'assistant', content: text });
+    }
 }
 
 async function fetchReply(message) {
@@ -61,7 +71,7 @@ async function fetchReply(message) {
         const response = await fetch('/api/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message }),
+            body: JSON.stringify({ message, conversation: conversationHistory }),
         });
 
         const data = await response.json();
